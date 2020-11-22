@@ -39,7 +39,7 @@ TEST(QuemTestaOsTestes, umveizum) {
     ASSERT_EQ(resultado, 1); // Certifica que o multiplicando (1) multiplicado pelo multiplicador (1) resulta no resultado (1)
 }
 
-TEST(QuemTestaOsTestes, doisveizquatro) {
+TEST(QuemTestaOsTestes, DISABLED_doisveizquatro) {
     int16_t a = 2; // Multiplicando: 2
     int16_t b = 4; // Multiplicador: 4
 
