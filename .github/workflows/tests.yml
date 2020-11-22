@@ -1,0 +1,32 @@
+name: Unit tests
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup ROS
+        uses: ros-tooling/setup-ros@0.0.26
+        with:
+          required-ros-distributions: melodic
+      - name: Compile and run tests
+        run: |
+          WORK=$(pwd)
+
+          source /opt/ros/melodic/setup.bash
+          rosdep update
+
+          mkdir -p ~/catkin_ws/src
+          cd ~/catkin_ws
+          catkin_make  # initialize catkin workspace
+
+          cd ~/catkin_ws/src
+          ln -s $WORK  .
+
+          cd ~/catkin_ws
+          source devel/setup.bash  # Add workspace to catkin path
+          rosdep install qtot  # install project dependencies
+          catkin_make run_tests
